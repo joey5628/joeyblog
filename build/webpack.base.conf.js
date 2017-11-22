@@ -12,8 +12,8 @@ module.exports = {
     context: path.resolve(__dirname, '../'),
     entry: {
         app: [
-            // 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true',
-            'webpack-hot-middleware/client?noInfo=true&reload=true',
+            'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true',
+            // 'webpack-hot-middleware/client?noInfo=true&reload=true',
             './src/main.js'
         ],
         vendor: [

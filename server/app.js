@@ -6,6 +6,7 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const routes = require('./routes/index')
+const config = require('../config')
 
 const app = new Koa()
 
@@ -21,22 +22,19 @@ if (env === 'development') {
 
     let compiler = webpack(devWebpackConfig)
 
-    let devMiddleware = webpackDevMiddleware(compiler, {
-        publicPath: devWebpackConfig.output.publicPath,
-        quiet: true
-    })
+    let devMiddleware = webpackDevMiddleware(compiler, devWebpackConfig.devServer)
 
     let hotMiddleware = webpackHotMiddleware(compiler, {
         log: () => {}
     })
 
     // force page reload when html-webpack-plugin template changes
-    compiler.plugin('compilation', function (compilation) {
-        compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
-            // hotMiddleware.publish({ action: 'reload' })
-            cb()
-        })
-    })
+    // compiler.plugin('compilation', function (compilation) {
+    //     compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+    //         // hotMiddleware.publish({ action: 'reload' })
+    //         cb()
+    //     })
+    // })
 
     app.use(convert(devMiddleware))
     app.use(convert(hotMiddleware))
@@ -47,7 +45,7 @@ app.use(bodyParser())
 
 app.use(routes.routes()).use(routes.allowedMethods())
 
-app.listen(8001, ()=>{
+app.listen(config.port, ()=>{
     console.log('server listen 8001')
 })
 
