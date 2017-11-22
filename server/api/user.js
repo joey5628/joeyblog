@@ -2,11 +2,12 @@
  * Created by zhangyi on 2017/11/21.
  */
 const router = require('koa-router')()
+const userController = require('../controllers/user')
 
 module.exports = router
-    .get('/userInfo', (ctx)=>{
+    .post('/signIn', userController.signIn)
+    .get('/userInfo', (ctx) => {
         ctx.body = {
-            code: 0,
-            data: null
+            success: true
         }
     })

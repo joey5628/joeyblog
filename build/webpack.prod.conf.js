@@ -11,6 +11,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 
 const env = require('../config/prod.env')
+const apiUrlConfig = require('../config/api-url-config')
 
 const webpackConfig = merge(baseWebpackConfig, {
     module: {
@@ -29,7 +30,8 @@ const webpackConfig = merge(baseWebpackConfig, {
     plugins: [
         // http://vuejs.github.io/vue-loader/en/workflow/production.html
         new webpack.DefinePlugin({
-            'process.env': env
+            'process.env': env,
+            'API_URL': JSON.stringify(apiUrlConfig['development'])
         }),
         // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
         new webpack.optimize.UglifyJsPlugin({

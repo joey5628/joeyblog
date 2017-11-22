@@ -5,6 +5,7 @@ const config = require('../config')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const apiUrlConfig = require('../config/api-url-config')
 // const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 // const portfinder = require('portfinder')
 
@@ -17,7 +18,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 
     // these devServer options should be customized in /config/index.js
     devServer: {
-        noInfo: false,
+        noInfo: true,
         clientLogLevel: 'warning',
         historyApiFallback: true,
         // hot: true,
@@ -40,7 +41,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env': require('../config/dev.env')
+            'process.env': require('../config/dev.env'),
+            'API_URL': JSON.stringify(apiUrlConfig['development'])
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.

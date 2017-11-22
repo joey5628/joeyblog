@@ -5,8 +5,10 @@
 
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
+const koaLogger = require('koa-logger')
 const routes = require('./routes/index')
 const config = require('../config')
+const mongoose = require('./db')
 
 const app = new Koa()
 
@@ -40,6 +42,9 @@ if (env === 'development') {
     app.use(convert(hotMiddleware))
 }
 
+// 配置控制台日志中间件
+app.use(koaLogger())
+
 // 配置ctx.body解析中间件
 app.use(bodyParser())
 
@@ -48,9 +53,3 @@ app.use(routes.routes()).use(routes.allowedMethods())
 app.listen(config.port, ()=>{
     console.log('server listen 8001')
 })
-
-
-
-
-
-

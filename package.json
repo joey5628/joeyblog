@@ -6,7 +6,7 @@
     "private": true,
     "scripts": {
         "dev": "node server/app.js",
-        "start": "nodemon --watch build --exec npm run dev",
+        "start": "nodemon --watch build --watch server --exec npm run dev",
         "build": "node build/build.js"
     },
     "dependencies": {
@@ -14,7 +14,11 @@
         "element-ui": "^2.0.5",
         "koa": "^2.4.1",
         "koa-bodyparser": "^4.2.0",
+        "koa-logger": "^3.1.0",
         "koa-router": "^7.3.0",
+        "koa-session": "^5.5.1",
+        "mongoose": "^4.13.4",
+        "normalize.css": "^7.0.0",
         "vue": "^2.5.2",
         "vue-router": "^3.0.1"
     },
