@@ -8,7 +8,7 @@ const bodyParser = require('koa-bodyparser')
 const koaLogger = require('koa-logger')
 const routes = require('./routes/index')
 const config = require('../config')
-const mongoose = require('./db')
+// const mongoose = require('./db')
 
 const app = new Koa()
 
@@ -51,5 +51,5 @@ app.use(bodyParser())
 app.use(routes.routes()).use(routes.allowedMethods())
 
 app.listen(config.port, ()=>{
-    console.log('server listen 8001')
+    console.log('server listen 8000')
 })

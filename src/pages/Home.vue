@@ -6,7 +6,7 @@
         <i class="el-icon-delete"></i>
         <el-button type="primary" icon="el-icon-search">搜索</el-button>
 
-        <el-checkbox v-model="checked">备选项</el-checkbox>
+        <el-checkbox>备选项</el-checkbox>
     </div>
 </template>
 
