@@ -12,7 +12,7 @@
     <!--</el-container>-->
     <el-container class="wrapper">
         <el-aside>
-            <common-side></common-side>
+            <common-side/>
         </el-aside>
         <el-container class="container">
             <el-header>Header</el-header>
@@ -49,8 +49,9 @@
         }
 
         .el-aside {
-            width: 250px !important;
+            width: 200px !important;
             background-color: @side-fill;
+            overflow: hidden;
         }
     }
 
