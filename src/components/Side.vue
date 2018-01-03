@@ -1,46 +1,48 @@
 <template>
-    <div class="common-side">
-        <div class="retract">
-            <i class="el-icon-arrow-left"></i>
-        </div>
-        <div class="name-card">
-            <div class="photo-wrapper">
-                <img src="../assets/img/sun.jpg" alt="">
+    <el-aside class="common-side-wrapper">
+            <div class="retract">
+                <i class="el-icon-arrow-left"></i>
             </div>
-        </div>
-        <ul class="link-wrapper">
-            <li class="link">
-                <router-link to="/home">
-                    <i class="iconfont icon-icon-f1"></i>
-                    <span>首页</span>
-                </router-link>
-            </li>
-            <li class="link">
-                <router-link to="/post">
-                    <i class="iconfont icon-article"></i>
-                    <span>文章</span>
-                </router-link>
-            </li>
-            <li class="link">
-                <router-link to="/post">
-                    <i class="iconfont icon-icon03"></i>
-                    <span>分类</span>
-                </router-link>
-            </li>
-            <li class="link">
-                <router-link to="/post">
-                    <i class="iconfont icon-tag"></i>
-                    <span>标签</span>
-                </router-link>
-            </li>
-            <li class="link active">
-                <router-link to="/post">
-                    <i class="iconfont icon-comment"></i>
-                    <span>评论</span>
-                </router-link>
-            </li>
-        </ul>
-    </div>
+            <div class="common-side">
+                <div class="name-card">
+                    <div class="photo-wrapper">
+                        <img src="../assets/img/sun.jpg" alt="">
+                    </div>
+                </div>
+                <ul class="link-wrapper">
+                    <li class="link">
+                        <router-link to="/home">
+                            <i class="iconfont icon-icon-f1"></i>
+                            <span>首页</span>
+                        </router-link>
+                    </li>
+                    <li class="link">
+                        <router-link to="/post">
+                            <i class="iconfont icon-article"></i>
+                            <span>文章</span>
+                        </router-link>
+                    </li>
+                    <li class="link">
+                        <router-link to="/post">
+                            <i class="iconfont icon-icon03"></i>
+                            <span>分类</span>
+                        </router-link>
+                    </li>
+                    <li class="link">
+                        <router-link to="/post">
+                            <i class="iconfont icon-tag"></i>
+                            <span>标签</span>
+                        </router-link>
+                    </li>
+                    <li class="link active">
+                        <router-link to="/post">
+                            <i class="iconfont icon-comment"></i>
+                            <span>评论</span>
+                        </router-link>
+                    </li>
+                </ul>
+            </div>
+    </el-aside>
 </template>
 
 <script>
@@ -52,7 +54,13 @@
 <style lang="less">
     @import "../assets/css/default.less";
 
-    .common-side {
+    .common-side-wrapper {
+        width: 200px !important;
+        background-color: @side-fill;
+        overflow: hidden;
+        box-shadow: 0 0 5px @side-fill;
+        position: relative;
+        z-index: 2;
 
         .retract {
             position: absolute;
@@ -68,7 +76,7 @@
             justify-content: center;
             align-items: center;
             transition: all 0.2s;
-            box-shadow: 0 0 5px #333;
+            box-shadow: 0 0 5px @side-fill;
 
             i {
                 font-size: 14px;
@@ -77,16 +85,23 @@
                 margin-left: 22px;
             }
         }
-
         &:hover {
             .retract {
                 left: 172px;
             }
         }
 
+    }
+    .common-side {
+        height: 100%;
+        position: relative;
+        background-color: @side-fill;
+        z-index: 2;
+
         .name-card {
             .photo-wrapper {
-                margin: 20px auto;
+                margin: auto;
+                padding: 20px;
                 width: 100px;
                 height: 100px;
 
@@ -101,10 +116,7 @@
         }
 
         .link-wrapper {
-            position: relative;
-            z-index: 2;
             .link {
-                background-color: @side-fill;
                 a {
                     height: 50px;
                     line-height: 50px;

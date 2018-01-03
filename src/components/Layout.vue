@@ -11,12 +11,12 @@
         <!--</el-container>-->
     <!--</el-container>-->
     <el-container class="wrapper">
-        <el-aside>
-            <common-side/>
-        </el-aside>
-        <el-container class="container">
-            <el-header>Header</el-header>
-            <el-main>Main</el-main>
+        <common-side/>
+        <el-container class="container is-vertical">
+            <common-header></common-header>
+            <el-main>
+                <router-view class="layout-container"></router-view>
+            </el-main>
         </el-container>
     </el-container>
 </template>
@@ -48,10 +48,8 @@
             flex: 1;
         }
 
-        .el-aside {
-            width: 200px !important;
-            background-color: @side-fill;
-            overflow: hidden;
+        .el-main {
+            background-color: #f3f9f9;
         }
     }
 
