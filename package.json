@@ -1,7 +1,7 @@
 {
-    "name": "joeyblog-admin",
+    "name": "joeyblog",
     "version": "1.0.0",
-    "description": "博客后台管理系统",
+    "description": "博客系统",
     "author": "zhangyi <zhangyi5628@126.com>",
     "private": true,
     "scripts": {

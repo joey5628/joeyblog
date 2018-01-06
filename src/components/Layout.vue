@@ -1,15 +1,4 @@
 <template>
-    <!--<el-container class="wrapper is-vertical">-->
-        <!--<el-aside>-->
-        <!--</el-aside>-->
-        <!--<el-container class="container">-->
-            <!--<el-header>-->
-            <!--</el-header>-->
-            <!--<el-main>-->
-                <!--<router-view class="el-main layout-container"></router-view>-->
-            <!--</el-main>-->
-        <!--</el-container>-->
-    <!--</el-container>-->
     <el-container class="wrapper">
         <common-side/>
         <el-container class="container is-vertical">
@@ -24,11 +13,9 @@
 <script>
     import Header from 'components/Header'
     import Side from 'components/Side'
-    import CommonHeader from "@/components/Header";
 
     export default {
         components: {
-            CommonHeader,
             'common-header': Header,
             'common-side': Side
         }
@@ -50,6 +37,7 @@
 
         .el-main {
             background-color: #f3f9f9;
+            padding: 12px 16px;
         }
     }
 

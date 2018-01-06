@@ -10,34 +10,12 @@
                     </div>
                 </div>
                 <ul class="link-wrapper">
-                    <li class="link">
-                        <router-link to="/home">
-                            <i class="iconfont icon-icon-f1"></i>
-                            <span>首页</span>
-                        </router-link>
-                    </li>
-                    <li class="link">
-                        <router-link to="/post">
-                            <i class="iconfont icon-article"></i>
-                            <span>文章</span>
-                        </router-link>
-                    </li>
-                    <li class="link">
-                        <router-link to="/post">
-                            <i class="iconfont icon-icon03"></i>
-                            <span>分类</span>
-                        </router-link>
-                    </li>
-                    <li class="link">
-                        <router-link to="/post">
-                            <i class="iconfont icon-tag"></i>
-                            <span>标签</span>
-                        </router-link>
-                    </li>
-                    <li class="link active">
-                        <router-link to="/post">
-                            <i class="iconfont icon-comment"></i>
-                            <span>评论</span>
+                    <li v-for="(link, index) in links"
+                        :key="index"
+                        class="link">
+                        <router-link :to="link.path">
+                            <i class="iconfont" :class="link.icon"></i>
+                            <span>{{link.name}}</span>
                         </router-link>
                     </li>
                 </ul>
@@ -47,7 +25,40 @@
 
 <script>
     export default {
-        name: 'side'
+        data () {
+            return {
+                links: [{
+                    name: '首页',
+                    path: '/home',
+                    icon: 'icon-icon-f1',
+                    isActive: true
+                }, {
+                    name: '文章',
+                    path: '/article',
+                    icon: 'icon-article',
+                    isActive: false
+                }, {
+                    name: '分类',
+                    path: '/category',
+                    icon: 'icon-icon03',
+                    isActive: false
+                }, {
+                    name: '标签',
+                    path: '/tag',
+                    icon: 'icon-tag',
+                    isActive: false
+                }, {
+                    name: '评论',
+                    path: '/comment',
+                    icon: 'icon-comment',
+                    isActive: false
+                }]
+            }
+        },
+
+        methods: {
+
+        }
     }
 </script>
 
@@ -129,9 +140,8 @@
                     .iconfont {
                         margin-right: 15px;
                     }
-                }
-                &.active {
-                    a {
+
+                    &.router-link-active {
                         background-color: @brand-primary;
                         color: #fff;
                         opacity: 1;
