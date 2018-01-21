@@ -1,37 +1,54 @@
 const User = require('../models/user')
 
 module.exports = {
+    /**
+     * 登录
+     * @param ctx
+     * @returns {Promise<void>}
+     */
     async signIn (ctx) {
-        let result = {
-            success: false,
-            message: '用户不存在'
-        }
-
         const { username, password } = ctx.request.body
 
         await User.findOne({
             username
         }, (err, user) => {
-            console.log('user:', user)
             if (err) {
                 throw(err)
             }
 
             if (user) {
                 if (password === user.password) {
-                    result = {
-                        success: true,
-                        message: '成功'
+                    ctx.session.user = {
+                        username,
+                        password
                     }
+                    return ctx.success('登录成功')
                 } else {
-                    result = {
-                        success: false,
-                        message: '密码错误'
-                    }
+                    return ctx.error('密码错误')
                 }
             }
+            return ctx.error('用户不存在')
+        })
+    },
 
-            ctx.body = result
+    async getUserInfo (ctx) {
+
+        const query = ctx.request.query
+
+        const username = query.username
+        await User.findOne({
+            username
+        }, (err, user) => {
+            if (err) {
+                throw(err)
+            }
+
+            if (user) {
+                return ctx.success({
+                    data: user
+                })
+            }
+            return ctx.error('未查找到相应的用户')
         })
     }
 }

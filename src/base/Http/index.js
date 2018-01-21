@@ -25,8 +25,8 @@ class Http {
 
         let response
         try {
-            response = axios.get(URL)
-            console.log('get response:', response)
+            response = await axios.get(URL)
+            console.log('get response.data:', response.data)
             return response.data;
         } catch(error) {
             console.log('get error:', error)
@@ -43,7 +43,7 @@ class Http {
             console.log('post params:', params)
 
             response = await axios.post(url, params)
-            console.log('post response:', response)
+            console.log('post response.data:', response.data)
             return response.data
         } catch(error) {
             console.log('post error:', error)

@@ -2,18 +2,20 @@
     <div class="login-wrapper">
         <div class="login-main">
             <h2>登&nbsp;录</h2>
-            <div>
-                <div class="input-group">
-                    <input type="text" placeholder="用户名"/>
-                </div>
-                <div class="input-group">
-                    <input type="password" placeholder="密码"/>
-                </div>
+            <form  v-on:onsubmit="signIn">
+                <div>
+                    <div class="input-group">
+                        <input type="text" placeholder="用户名" v-model="username"/>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="密码" v-model="password"/>
+                    </div>
 
-                <div class="input-group">
-                    <button class="btn-login" v-on:click="signIn">登&nbsp;录</button>
+                    <div class="input-group">
+                        <button class="btn-login" v-on:click="signIn">登&nbsp;录</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </template>
@@ -24,27 +26,50 @@
     export default {
         data: ()=> {
             return {
-
+                username: '',
+                password: ''
             }
         },
 
         created: function() {
             console.log('created:', API_URL)
-//            this.signIn()
         },
 
         methods: {
             async signIn() {
                 console.log('signIn')
                 let json = await Http.post({
-                    url: 'http://localhost:8000/api/user/signIn',
+                    url: API_URL + 'user/signIn',
                     params: {
-                        username: 'zhangyi',
-                        password: '123456'
+                        username: this.username,
+                        password: this.password
                     }
                 })
                 console.log('json:', json)
-            }
+                if (json.success) {
+                    this.$message({
+                        showClose: true,
+                        message: json.message,
+                        type: 'success'
+                    });
+                } else {
+                    this.$message({
+                        showClose: true,
+                        message: json.message,
+                        type: 'error'
+                    });
+                }
+            },
+
+            // async getUserInfo () {
+            //     let json2 = await Http.get({
+            //         url: 'http://localhost:8000/api/user/userInfo',
+            //         params: {
+            //             username: 'zhangyi'
+            //         }
+            //     })
+            //     console.log('json2:', json2)
+            // }
         }
     }
 </script>

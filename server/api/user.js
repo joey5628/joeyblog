@@ -6,8 +6,4 @@ const userController = require('../controllers/user')
 
 module.exports = router
     .post('/signIn', userController.signIn)
-    .get('/userInfo', (ctx) => {
-        ctx.body = {
-            success: true
-        }
-    })
+    .get('/userInfo', userController.getUserInfo)

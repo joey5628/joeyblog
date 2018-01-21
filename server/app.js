@@ -8,7 +8,8 @@ const bodyParser = require('koa-bodyparser')
 const koaLogger = require('koa-logger')
 const routes = require('./routes/index')
 const config = require('../config')
-// const mongoose = require('./db')
+const mongoose = require('./db')
+const session = require('koa-session-minimal')
 
 const app = new Koa()
 
@@ -41,12 +42,30 @@ if (env === 'development') {
     app.use(convert(devMiddleware))
     app.use(convert(hotMiddleware))
 }
-
 // 配置控制台日志中间件
 app.use(koaLogger())
 
 // 配置ctx.body解析中间件
 app.use(bodyParser())
+
+app.use(session({
+    key: 'session-id'
+}))
+
+
+app.use(require('./middlewares/return_data'))
+// 判断是否已登录
+app.use(async (ctx,next) => {
+    const url = ctx.url
+    if (ctx.session.user || url === '/api/user/signIn') {
+        await next()
+    } else {
+        ctx.body = {
+            success: false,
+            message: '请先登录'
+        }
+    }
+})
 
 app.use(routes.routes()).use(routes.allowedMethods())
 
